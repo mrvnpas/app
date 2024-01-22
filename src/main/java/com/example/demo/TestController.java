@@ -16,10 +16,13 @@ public class TestController {
 	@GetMapping("/api/v1/customers")
 	public String findAllCustomers(){
 		List<TestEntity> testList = testRepository.findAll();
+		TestEntity testEntity = new TestEntity();
+		testEntity.setName("aaaa");
+		testRepository.saveAndFlush(testEntity);
 		if(testList.isEmpty()) {
-			TestEntity testEntity = new TestEntity();
-			testEntity.setName("aaaa");
-			testRepository.saveAndFlush(testEntity);
+			TestEntity testEntity2 = new TestEntity();
+			testEntity2.setName("aaaa");
+			testRepository.saveAndFlush(testEntity2);
 		}
 		testList = testRepository.findAll();
 		String result = testList.stream().map(TestEntity::toString).collect(Collectors.joining(","));
